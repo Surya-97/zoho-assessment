@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from 'date-fns';
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from 'moment';
 
 const MovieTicketAvailablity = () => {
     let theatreData = useSelector(state => state.SelectedTheatreReducer);
@@ -23,7 +24,7 @@ const MovieTicketAvailablity = () => {
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
     const handleOpenModal = (show, showTime, theater) => {
-        show = { movie: show.movie, time: showTime, theatre_name: theater.theatre_name, booked_seats: theater, bookingDate:bookingDate }
+        show = { movie: show.movie, time: showTime, theatre_name: theater.theatre_name, booked_seats: theater, bookingDate: moment(bookingDate).format('L') }
         setShowModal(true);
         setSelectedShow(show)
     };
@@ -90,10 +91,10 @@ const MovieTicketAvailablity = () => {
             </div>
 
             <Modal show={showModal} fullscreen={true} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton white>
                     <div className="theatre-details tn-entity-details" style={{ width: "100%" }}>
                         <h4 style={{ color: "rgb(221 119 36)" }}>{selectedShow.theatre_name} - <span style={{ color: "white" }}>{selectedShow.movie}</span></h4>
-                        <h6 style={{ color: "white" }}>{new Date().toLocaleDateString("en-US", options)} - {selectedShow.time} </h6>
+                        <h6 style={{ color: "white" }}>{moment(bookingDate).format('LL')} - {selectedShow.time} </h6>
                     </div>
                 </Modal.Header>
                 <Modal.Body>

@@ -19,8 +19,8 @@ function App() {
     <BrowserRouter>
     <Navbar />
     <Routes>
-        <Route path="/" element={<MovieList />} />
-        <Route path="/MovieTheatreDetails" element={<MovieTheatreDetails />} />
+        <Route path="/" element={<MovieTheatreDetails />} />
+        <Route path="/MovieList" element={<MovieList />} />
         <Route path="/MovieTicketAvailablity" element={<MovieTicketAvailablity />} />
         <Route path="/SeatBooking" element={<SeatBooking />} />
     </Routes>

@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare, faCheckSquare, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import '../styles/SeatBooking.css'
-import screen from '../assets/images/screen.jpg'
 import axios from "axios";
+import { Toast, ToastContainer } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const SeatBooking = ({selectedShow}) => {
-    console.log(selectedShow)
+const SeatBooking = ({ selectedShow }) => {
+    const [alertShow, setAlertShow] = useState(false);
+    const [bookingResponse, setBookingResponse] = useState("");
+
+    const navigate = useNavigate()
     const rows = 10;
     const cols = 10;
     const [seats, setSeats] = useState(
@@ -15,23 +19,24 @@ const SeatBooking = ({selectedShow}) => {
             .map(() => Array(cols).fill(false))
     );
     const unavailableSeats = []
+    const desiredDate = selectedShow.bookingDate;
 
-    const desiredDate = "4/9/2023";
-    console.log( selectedShow?.booked_seats?.booked_seats.find((item)=> item.date === desiredDate))
-    for (const booking of selectedShow?.booked_seats?.booked_seats) {
-        if (booking.date === desiredDate) {
-          if (booking.show1_time === selectedShow.time) {
-            unavailableSeats.push(...JSON.parse(booking.show1_booked_seats));
-          }
-          if (booking.show2_time === selectedShow.time) {
-            unavailableSeats.push(...JSON.parse(booking.show2_booked_seats));
-          }
-          if (booking.show3_time === selectedShow.time) {
-            unavailableSeats.push(...JSON.parse(booking.show3_booked_seats));
-          }
-          if (booking.show4_time === selectedShow.time) {
-            unavailableSeats.push(...JSON.parse(booking.show4_booked_seats));
-          }
+    if (selectedShow?.booked_seats?.booked_seats !== undefined) {
+        for (const booking of selectedShow?.booked_seats?.booked_seats) {
+            if (booking.date === desiredDate) {
+                if (booking.show1_time === selectedShow.time) {
+                    unavailableSeats.push(...JSON.parse(booking.show1_booked_seats));
+                }
+                if (booking.show2_time === selectedShow.time) {
+                    unavailableSeats.push(...JSON.parse(booking.show2_booked_seats));
+                }
+                if (booking.show3_time === selectedShow.time) {
+                    unavailableSeats.push(...JSON.parse(booking.show3_booked_seats));
+                }
+                if (booking.show4_time === selectedShow.time) {
+                    unavailableSeats.push(...JSON.parse(booking.show4_booked_seats));
+                }
+            }
         }
     }
     unavailableSeats.forEach(seatIndex => {
@@ -58,27 +63,13 @@ const SeatBooking = ({selectedShow}) => {
             });
         });
         setUnavailableIndices(newUnavailableIndices);
-    }, [seats]);
-    
-    // const getSelectedSeats = () => {
-    //     const selected = [];
-    //     seats.forEach((row, rowIndex) => {
-    //         row.forEach((isSelected, colIndex) => {
-    //             if (isSelected) {
-    //                 const rowLabel = String.fromCharCode(65 + rowIndex);
-    //                 const colLabel = colIndex + 1;
-    //                 selected.push(`${rowLabel}${colLabel}`);
-    //             }
-    //         });
-    //     });
-    //     return selected;
-    // };
+    }, [seats, bookingResponse]);
 
     const getSelectedSeats = () => {
         const selected = [];
         seats.forEach((row, rowIndex) => {
             row.forEach((isSelected, colIndex) => {
-                if (isSelected) {
+                if (isSelected === true) {
                     selected.push(rowIndex * cols + colIndex);
                 }
             });
@@ -88,27 +79,36 @@ const SeatBooking = ({selectedShow}) => {
 
     const handleSubmit = (() => {
         const selectedSeats = getSelectedSeats();
-        console.log(selectedSeats); // ['A1', 'B2']
         let bookSeats = {
             show_time: selectedShow.time,
             movie_name: selectedShow.movie,
             theatre_name: selectedShow.theatre_name,
             booked_seats: selectedSeats,
-            date: new Date().toLocaleDateString("en-US"),
+            date: desiredDate,
             user_mail_id: "suryaer97@gmail.com"
         }
 
-        // axios.post(`https://zincubate.in/api/MovieTicketChecker?action=bookSeats`, bookSeats).then((response)=>{
-        //     console.log(response)
-        // })
+        axios.post(`https://zincubate.in/api/MovieTicketChecker?action=bookSeats`, bookSeats).then((response) => {
+            console.log(response.data.message)
+            setBookingResponse(response.data.message)
+            setAlertShow(true)
+            setTimeout(() => {
+             navigate('/')
+            }, 4000);
+        })
     })
-
 
     return (
         <div>
+            <ToastContainer position="top-end" className="p-3">
+                <Toast show={alertShow} onClose={() => setAlertShow(false)} delay={3000} autohide bg="success">
+                    <Toast.Body>{bookingResponse}</Toast.Body>
+                </Toast>
+            </ToastContainer>
             <div className="select-ticket">
                 Select your seats
             </div>
+
 
             <div className="seating-chart">
                 {seats.map((row, rowIndex) => (
@@ -123,14 +123,16 @@ const SeatBooking = ({selectedShow}) => {
                                         toggleSeat(rowIndex, colIndex);
                                     }
                                 }}
-                                // onClick={() => toggleSeat(rowIndex, colIndex)}
+                            // onClick={() => toggleSeat(rowIndex, colIndex)}
                             >
                                 <div className="item">
-                                {isSelected ? (
-                                    <FontAwesomeIcon icon={faCheckSquare} className="icon selected" />
-                                ) : (
-                                    <FontAwesomeIcon icon={faSquare} className="icon" />
-                                )}
+                                    {isSelected == 'unavailable' ? (
+                                        <FontAwesomeIcon icon={faTimesCircle} className="icon unavailable" />
+                                    ) : isSelected ? <FontAwesomeIcon icon={faCheckSquare} className="icon selected" />
+                                        :
+                                        (
+                                            <FontAwesomeIcon icon={faSquare} className="icon" />
+                                        )}
                                 </div>
                             </div>
                         ))}

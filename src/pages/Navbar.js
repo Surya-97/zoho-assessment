@@ -16,8 +16,8 @@ function Navbar() {
                         placeholder="Search for Movies, Events, Plays, Sports and Activities" autocomplete="off" spellcheck="false" dir="auto"
                         style={{ position: "relative", verticalAlign: "top", backgroundColor: "#fff" }} />
                     <button type="submit" class="btn">Search</button> */}
-                    <li className='link'><a style={{ color: "#f5a623" }} href="/MovieTheatreDetails">Theater</a></li>
-                    <li className='link'><a style={{ color: "#f5a623" }} href="/">Movies</a></li>
+                    <li className='link'><a style={{ color: "#f5a623" }} href="/">Theater</a></li>
+                    <li className='link'><a style={{ color: "#f5a623" }} href="/MovieList">Movies</a></li>
                 </ul>
             </div>
             <span className='mr' style={{ color: "#f5a623" }}></span>

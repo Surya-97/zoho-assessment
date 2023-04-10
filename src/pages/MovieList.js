@@ -38,9 +38,9 @@ function MovieList() {
                             <div class="movie-info">
                                 <h5 class="movie-title">{movie.movie_name}</h5>
                                 <p class="movie-genre">{movie.tags}</p>
-                                <div class="movie-rating">
+                                <div class="movie-rating ml">
                                     <span class="rating-icon"></span>
-                                    <span class="rating-value">9.2/10</span>
+                                    <span class="rating-value">{movie.imdb_rating} / 10</span>
                                 </div>
                             </div>
                         </div>
