@@ -1,0 +1,113 @@
+.tn-main-content {
+  padding: 20px;
+}
+
+.tn-main-inner-content {
+  display: inline;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tn-section-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tn-entity-list {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px #ccc;
+  background: white !important;
+}
+
+.tn-entity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tn-theatre-icon {
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+
+.tn-entity-details {
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.tn-services {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.tn-servicee {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+}
+
+.movie-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rating-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #f5a623;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.rating-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+}
+
+.tn-entity-book {
+  flex-shrink: 0;
+}
+
+.tn-entity-book a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f5a623;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .tn-entity-list {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    background: white;
+  }
+
+  .tn-main-inner-content {
+    display: flex;
+  }
+}
+
+.tn-section-title h2 {
+  display: inline;
+  color: #212121;
+  letter-spacing: 4px;
+  line-height: 20px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #ffc107;
+}

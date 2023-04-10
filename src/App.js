@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import MovieList from './pages/MovieList';
+import MovieTheatreDetails from './pages/MovieTheatreDetails';
+import MovieTicketAvailablity from './pages/MovieTicketAvailablity';
+
+import Navbar from './pages/Navbar';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+import SeatBooking from './pages/SeatBooking';
+
+const initialState = {};
+const store = configureStore(initialState);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Provider store={store}>
+    <BrowserRouter>
+    <Navbar />
+    <Routes>
+        <Route path="/" element={<MovieList />} />
+        <Route path="/MovieTheatreDetails" element={<MovieTheatreDetails />} />
+        <Route path="/MovieTicketAvailablity" element={<MovieTicketAvailablity />} />
+        <Route path="/SeatBooking" element={<SeatBooking />} />
+    </Routes>
+    </BrowserRouter>
+    </Provider>
+    </>
   );
 }
 
