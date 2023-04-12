@@ -5,6 +5,7 @@ import screen from '../assets/images/logo.jpg'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { TheatreActions } from '../actions/TheaterActions';
+import MovieCarousel from './MovieCarousel';
 
 function MovieTheatreDetails() {
   const navigate = useNavigate()
@@ -26,6 +27,7 @@ function MovieTheatreDetails() {
 
   return (
     <>
+      <MovieCarousel></MovieCarousel>
       <div className='tn-main-content'>
         <div className='tn-main-inner-content'>
           <div className="tn-section-title title">

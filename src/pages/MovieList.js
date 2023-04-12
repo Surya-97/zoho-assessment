@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/MovieList.css'
 import axios from 'axios';
+import MovieCarousel from './MovieCarousel';
 
 function MovieList() {
 
@@ -15,26 +16,15 @@ function MovieList() {
 
     return (
         <div className="container">
+            <MovieCarousel></MovieCarousel>
             <div className="row">
                 {movies.map((movie) => (
                     <div key={movie.id} className="col-sm-6 col-md-4 col-lg-3">
-                        {/* //     <div className="card">
-                    //         <img className="card-img-top" src={movie.thumbnail_url} alt={movie.movie_name} />
-                    //         <div className="card-body">
-                    //             <h5 className="card-title">{movie.movie_name}</h5>
-                    //             <p className="card-text">{movie.description}</p>
-                    //         </div>
-                    //     </div>
-                    // </div> */}
                         <div className="card">
-                            <div className="card-header">
+                            {/* <div className="card-header">
                                 <span className="badge badge-primary">{movie.imdb_rating}</span>
-                            </div>
+                            </div> */}
                             <img className="card-img-top" src={movie.thumbnail_url} alt={movie.movie_name} />
-                            {/* <div className="card-body">
-                       <h5 className="card-title">{movie.movie_name}</h5>
-                       <p className="card-text">{movie.description}</p>
-                     </div> */}
                             <div class="movie-info">
                                 <h5 class="movie-title">{movie.movie_name}</h5>
                                 <p class="movie-genre">{movie.tags}</p>

@@ -69,7 +69,7 @@ const MovieTicketAvailablity = () => {
                     <h2>{theatreData.theatre_name}</h2>
                     </div>
                     <div className="date-picker">
-                    <span style={{ color: "#f5a623", fontSize: "16px", fontWeight: "bold", width: "auto",minWidth: "100px" }}>Select Date:</span>
+                    <span style={{ color: "#1f2533", fontSize: "16px", fontWeight: "bold", width: "auto",minWidth: "100px" }}>Select Date:</span>
                     <DatePicker
                         selected={bookingDate}
                         onChange={(date) => setBookingDate(date)}

@@ -13,6 +13,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
+  background-color: #1f2533;
 }
 
 .movie-container h3 {
@@ -27,9 +28,9 @@
 }
 
 .time-list li {
-  background-color: #349638;
-  color: #fff;
-  padding: 10px 20px;
+  background-color: darkslategray;
+  color: #f5a623;
+  padding: 5px 10px;
   border-radius: 5px;
   display: inline-block;
   margin-right: 10px;
@@ -42,16 +43,17 @@
 }
 
 .movie-title {
-  color: #000000;
+  color: #f5a623;
 }
 
 .tn-section-title h2 {
   display: inline;
-  color: #f5a623;
+  color: #1f2533;
   letter-spacing: 4px;
   line-height: 20px;
   text-transform: uppercase;
-  border-bottom: 2px solid #ffc107;
+  border-bottom: 2px solid #1f2533;
+  font-family: serif;
 }
 
 @media only screen and (min-width: 768px) {

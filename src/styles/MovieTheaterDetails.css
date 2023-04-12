@@ -1,3 +1,12 @@
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 .tn-main-content {
   padding: 20px;
 }
@@ -28,6 +37,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  animation: slide-in 0.5s ease-in-out;
 }
 
 .tn-theatre-icon {
@@ -87,6 +97,7 @@
   font-size: 14px;
   font-weight: 600;
   border-radius: 4px;
+  cursor: pointer;
   text-decoration: none;
 }
 
